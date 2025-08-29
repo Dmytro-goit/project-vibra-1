@@ -3,10 +3,18 @@ import { useState, useEffect } from "react";
 const clientId = import.meta.env.VITE_CLIENT_ID;
 const clientSecret = import.meta.env.VITE_CLIENT_SECRET;
 
+interface Album {
+  id: string;
+  name: string;
+  images: { url: string }[];
+  release_date: string;
+  external_urls: { spotify: string };
+}
+
 function Search() {
   const [searchInput, setSearchInput] = useState("");
   const [accessToken, setAccessToken] = useState("");
-  const [albums, setAlbums] = useState([]);
+  const [albums, setAlbums] = useState<Album[]>([]); // 🔹 додаємо тип
 
   // Отримання токена
   useEffect(() => {
@@ -49,14 +57,13 @@ function Search() {
       artistParams
     )
       .then((result) => result.json())
-      .then((data) => data.items);
+      .then((data) => data.items as Album[]); // 🔹 типізуємо масив
 
     setAlbums(albumsData);
   }
 
   return (
     <section className="py-14 bg-yellow-100 min-h-screen w-full">
-      {/* Поле вводу + кнопка пошуку */}
       <div className="flex justify-center mb-10">
         <div className="flex gap-2 w-full max-w-md">
           <input
@@ -76,7 +83,6 @@ function Search() {
         </div>
       </div>
 
-      {/* Карточки альбомів */}
       <div className="container mx-auto px-4">
         <div className="grid gap-6 sm:gap-8 md:gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-items-center">
           {albums.map((album) => (
@@ -84,7 +90,6 @@ function Search() {
               key={album.id}
               className="bg-white rounded-lg shadow-lg w-64 flex flex-col items-center overflow-hidden m-3"
             >
-              {/* Обкладинка з відступами */}
               <div className="p-6">
                 <img
                   src={album.images[0]?.url}
@@ -93,7 +98,6 @@ function Search() {
                 />
               </div>
 
-              {/* Текстова частина */}
               <div className="px-4 pb-8 text-center flex flex-col items-center gap-3">
                 <h3 className="font-bold text-lg">{album.name}</h3>
                 <p className="text-gray-700">
