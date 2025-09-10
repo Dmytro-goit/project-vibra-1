@@ -40,7 +40,7 @@ const About = () => {
   ];
 
   return (
-    <section id="about" className="py-14 overflow-hidden bg-yellow-100">
+    <section id="about" className="py-14 overflow-hidden bg-white">
       <div className="container mx-auto px-4">
         <article className="flex flex-col lg:flex-row items-center gap-12">
           {/* Зображення */}

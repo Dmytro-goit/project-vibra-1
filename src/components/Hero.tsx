@@ -9,7 +9,7 @@ const Hero = () => {
   ];
 
   return (
-    <section id="home" className="relative overflow-hidden bg-yellow-100">
+    <section id="home" className="relative overflow-hidden bg-white">
       <article
         className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-14 md:py-20 flex flex-col-reverse lg:flex-row 
       items-center gap-10 lg:gap-20"
