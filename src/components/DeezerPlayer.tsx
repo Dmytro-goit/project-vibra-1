@@ -17,8 +17,11 @@ const DeezerPlayer: React.FC = () => {
 
     try {
       const res = await fetch(
-        `http://localhost:3001/api/search?q=${encodeURIComponent(search)}`
+        `https://project-vibra-1.onrender.com/api/search?q=${encodeURIComponent(
+          search
+        )}`
       );
+
       const data = await res.json();
       setTracks(data.data);
     } catch (err) {
